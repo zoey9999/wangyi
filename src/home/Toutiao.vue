@@ -1,7 +1,7 @@
 <template>
   <div class="toutiao">
-    <div class="container" ref="toutiaowrapper">
-      <div>
+    <div class="container" ref="toutiaowrapper" >
+      <div >
         <div
           v-for="(newsitem,index) in toutiao"
           :key="index"
@@ -46,6 +46,7 @@ export default {
           this.scroll = new BScroll(this.$refs.toutiaowrapper, {
             click: true
           });
+          // console.log(this.scroll)
         });
       }
     });
@@ -63,6 +64,8 @@ export default {
     position: relative;
     width: 100%;
     height: 500px;
+    // left:0;
+    // top:0;
     overflow: hidden;
 
     .news-item {

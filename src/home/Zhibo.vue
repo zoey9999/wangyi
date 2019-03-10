@@ -1,9 +1,11 @@
 <template>
   <div class="zhibo">
-    <div class="livenav">
-      <div class="back" @click="goback">返回</div>
-      <!-- <img src="" alt=""> -->
-    </div>
+    <div class="nav">
+                  <span @click="backBtn">
+                        <img :src="backImg" width="20px" height="20px">
+                  </span>
+                  
+            </div>
 
     <div class="select">
       <div v-for="(item,index) in live" :key="index">
@@ -13,7 +15,7 @@
             <div class="roomName">{{item.roomName}}</div>
             <span class="source">{{item.source}}</span>
         </div>
-      </div>
+      </div> 
     </div>
   </div>
 </template>
@@ -23,7 +25,8 @@ export default {
   name: "zhibo",
   data() {
     return {
-      live: []
+      live: [],
+      backImg: require("../../public/img/agz.png"),
     };
   },
   created() {
@@ -43,7 +46,7 @@ export default {
     });
   },
   methods:{
-    goback() {
+    backBtn() {
       this.$router.back()
     }
   }
@@ -51,12 +54,16 @@ export default {
 </script>
 <style lang="scss" scoped>
   .zhibo{
-    .livenav{
-      width: 100%;
-      height: 40px;
-      position: fixed;
-      background-color: #cccccc;
-    }
+    .nav {
+            width: 100%;
+            height: 50px;
+            border: 1px solid #cccccc;
+            background-color: white;
+            line-height: 50px;
+            img {
+                  margin: auto 12px;
+            }
+      }
     .select{
       
       img{

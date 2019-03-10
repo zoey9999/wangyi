@@ -4,13 +4,20 @@
       <div class="nav">
         <img :src="wangYi" class="imgwangyi">
         <router-link to="/search" tag="span">
-          <input type="text" placeholder="请查找热点新闻">
+          <input type="text">
+          <div class="lunbo" >
+              <transition-group name="slider">
+                  <div class="supports-item" v-for="(s,index) in toutiao" :key="index" v-show="index === supportsIndex">
+                      <span class="supports-desc">{{s.title}}</span>
+                  </div>
+              </transition-group>
+          </div>
+          
         </router-link>
 
         <router-link tag="span" to="/home/zhibo">
           <img :src="zhiBo" class="imgzhibo">
         </router-link>
-        
       </div>
 
       <div class="title-select">
@@ -28,7 +35,6 @@
         </router-link>
       </div>
 
-      <div></div>
     </div>
     <router-view></router-view>
   </div>
@@ -39,18 +45,44 @@ export default {
   name: "home",
   data() {
     return {
+      toutiao: [],
+      supportsIndex: 0,
+      timer: null,
       wangYi: require("../../public/img/az3.9.png"),
       zhiBo: require("../../public/img/skin1_news_main_live_icon.png")
-    };
-  }
-};
+    }
+  },
+  created() {
+    // https://www.apiopen.top/journalismApi
+    this.axios.get("/toutiao").then(response => {
+      let res = response.data;
+      if (res) {
+        this.toutiao = res.T1348647853363;
+      }
+    });
+  },
+   watch: {
+            toutiao(item) {
+                // 清除旧的计时器
+                if (this.timer) {
+                    clearInterval(this.timer)
+                }
+                    this.timer = setInterval(() => {
+                        this.supportsIndex++
+                        if (this.supportsIndex >= item.length) { // 轮播到最后一张
+                            this.supportsIndex = 0 //回到第一张
+                        }
+                    }, 1000)
+
+            }
+        },
+}
 </script>
 <style lang="scss" scoped>
 .home {
   width: 100%;
   top: 0;
   left: 0;
-  
   .nav {
     top: 0;
     left: 0;
@@ -79,6 +111,48 @@ export default {
       border-width: 0;
       background-color: rgb(233, 71, 21);
       text-align: center;
+    }
+
+    .lunbo{
+       width: 180px;
+      height: 17px;
+      position:absolute;
+      top:15px;
+      left:90px;
+      overflow: hidden;
+
+      .supports-item {
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                color: #fff;
+            }
+
+            .slider-enter {
+                transform: translateY(100%);
+            }
+
+            .slider-enter-active,
+            .slider-leave-active {
+                transition: all 0.5s linear;
+            }
+
+            .slider-enter-to,
+            .slider-leave {
+                transform: translateY(0);
+            }
+
+            .slider-leave-to {
+                transform: translateY(-100%);
+            }
+
+            .supports-desc {
+                color: #fff;
+            }
     }
   }
 

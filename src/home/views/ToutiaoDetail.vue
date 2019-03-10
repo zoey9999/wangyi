@@ -12,6 +12,7 @@
                   <img :src="data.imgsrc" width="100%">
                   <div class="digest">{{data.digest}}</div>
             </div>
+            <div class="w"></div>
       </div>
 </template>
 
@@ -84,6 +85,10 @@ export default {
                         line-height: 30px;
                         letter-spacing: 5px;
                   }
+            }
+            .w{
+                  width: 100%;
+                  height: 50px;
             }
       }
 </style>

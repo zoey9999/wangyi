@@ -24,7 +24,7 @@
         <div class="box">
           <div class="redbox">{{item.price}}/千字</div>
         </div>
-        <div class="box">
+        <div class="box" @click="readNow(item)">
           <div class="redbox">立即阅读</div>
         </div>
         <div class="box">
@@ -60,6 +60,9 @@ export default {
   methods: {
     backBtn() {
       this.$router.back();
+    },
+    readNow(params) {
+      this.$router.push({name:'readnow',params})
     }
   }
 };

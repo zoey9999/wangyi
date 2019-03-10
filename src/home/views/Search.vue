@@ -20,12 +20,14 @@
                              <div class="item-title">
                                <span class="num">{{index+1}} </span> 
                                <span class="title">{{item.title}}</span>
-                               <span></span>
                               </div>
                       </div>
                 </div>
-                <li v-for="(item,index) in arrList" :key="index" class="hot-item" @click="toDetail(item)">
-                      <div class="item-title">{{item.title}}</div>
+                <li v-for="(item,index) in arrList" :key="index" class="item-list" @click="toDetail(item)">
+                   <div class="item-title">
+                    <span class="num">{{index+1}} </span> 
+                    <span class="title">{{item.title}}</span>
+                  </div>
                 </li>
           </ul>
     </div> 

@@ -119,7 +119,13 @@ export default new Router({
       path: '/noveldetail',
       name: 'noveldetail',
       component: () => import('./talkabout/NovelDetail.vue')
+    }, 
+    {
+      path: '/readnow',
+      name: 'readnow',
+      component: () => import('./talkabout/ReadNow.vue')
     },
+
 
     
     
