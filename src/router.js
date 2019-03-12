@@ -11,6 +11,7 @@ export default new Router({
     {
       path: '/',
       component: Home,
+      // redirect:'home',
       children:[
         {
           path: '/',
@@ -101,7 +102,7 @@ export default new Router({
       component: () => import('./home/Zhibo.vue')
     },
     {
-      path: '/detail',
+      path: '/detail/:docid',
       name: 'detail',
       component: () => import('./home/views/ToutiaoDetail.vue')
     },

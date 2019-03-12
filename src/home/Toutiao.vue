@@ -1,6 +1,6 @@
 <template>
   <div class="toutiao">
-    <div class="container" ref="toutiaowrapper" >
+    <div class="container" ref="toutiaowrapper">
       <div >
         <div
           v-for="(newsitem,index) in toutiao"
@@ -31,7 +31,8 @@ export default {
 
   data() {
     return {
-      toutiao: []
+      toutiao: [],
+      comlect: false,
     };
   },
 
@@ -46,16 +47,16 @@ export default {
           this.scroll = new BScroll(this.$refs.toutiaowrapper, {
             click: true
           });
-          // console.log(this.scroll)
         });
       }
     });
   },
   methods: {
     toutiaoDetail(params) {
-      this.$router.push({ name: "detail", params });
+      this.$store.commit("BecomeHave", params)
+      this.$router.push({ name: "detail", params});
     }
-  }
+  },
 };
 </script>
 <style lang="scss" scoped>

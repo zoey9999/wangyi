@@ -26,7 +26,7 @@ export default {
   name: "jingxuan",
   data() {
     return {
-      jingxuan: []
+      jingxuan: [],
     };
   },
 
@@ -36,6 +36,10 @@ export default {
                   let res = response.data
                   if (res) {
                       this.jingxuan = res.T1467284926140
+                      this.jingxuan.map(ele =>{
+                        ele.comlect=false
+                      })
+                      console.log("jingxuan",this.jingxuan)
                        this.$nextTick(() => {
                         this.scroll = new BScroll(this.$refs.wrapper, {
                           click: true
@@ -47,6 +51,7 @@ export default {
   },
   methods: {
     jingDetail(params){
+       this.$store.commit("BecomeHave", params)
       this.$router.push({name:'detail',params})
     }
   }

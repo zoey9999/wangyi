@@ -8,16 +8,25 @@
                   
             </div>
             <div class="contain">
-                  <div class="box">
+                  <div class="box" v-show="!$store.state.HasComlect">
                         <img :src="anyoneImg"  width="180px" height="180px">
                         <div class="text">暂无文章收藏</div>
                   </div>
-                  
+                  <div>
+                        <div v-for="(item,index) in collectItem" :key='index' class="item-list" @click="toDetail(item)">
+                              <div class="item-title">
+                                    <span class="num">{{index+1}} </span> 
+                                    <span class="title">{{item.title}}</span>
+                              </div>
+                        </div>
+                  </div>
             </div>
       </div>
 </template>
 
 <script>
+// eslint-disable-next-line
+// import { mapState } from "vuex";
 export default {
       name:'collection',
       data() {
@@ -29,6 +38,14 @@ export default {
       methods: {
             backBtn() {
                   this.$router.back();
+            },
+            toDetail(item) {
+                  this.$router.push({name:'detail',item})
+            }
+      },
+      computed: {
+            collectItem() {
+                  return this.$store.state.HasComlect
             }
       }
 }
@@ -57,6 +74,27 @@ export default {
                   .text{
                         margin: 15px 0 ;
                         color: #5a5a5a;
+                  }
+            }
+             .item-list{
+                  width: 100%;
+                  height: 45px;
+                  border-bottom: 1px solid #ccc;
+                  line-height: 45px;
+                  white-space: nowrap;
+                  .num{
+                  display: inline-block;
+                  margin: auto 10px;
+                  height: 45px;
+                  color: rgb(94, 93, 93);
+                  vertical-align: top;
+                  }
+                  .title{
+                  display: inline-block;
+                  width: 70%;
+                  overflow: hidden;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
                   }
             }
       }

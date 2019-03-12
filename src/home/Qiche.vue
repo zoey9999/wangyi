@@ -26,6 +26,7 @@ export default {
   name: "qiche",
   data() {
     return {
+      comlect: false,
       qiche: []
     };
   },
@@ -33,19 +34,21 @@ export default {
   created() {
     this.axios.get('/qiche')
               .then(response => {
+                // console.log(response)
                   let res = response.data
-                  if (res) {
+                  // if (res) {
                       this.qiche = res.list
                        this.$nextTick(() => {
                         this.scroll = new BScroll(this.$refs.wrapper, {
                           click: true
                         });
                       });
-                  }
+                  // }
               })
   },
   methods: {
     qicheDetail(params){
+      this.$store.commit("BecomeHave", params)
       this.$router.push({name:'detail',params})
     }
   }

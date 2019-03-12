@@ -1,13 +1,26 @@
 import Vue from "vue"
 import Vuex from "vuex"
-// import * as types from "mutation-types"
 
 Vue.use(Vuex)
 
 const state={
-      name:'小米'
+      HaveSee: [],
+      HasComlect: []
+
 }
-const store=new Vue.Store({
-      state
+
+const mutations = {
+      BecomeHave(state,arr){
+            // Vue.set(state,'HaveSee',arr)
+            state.HaveSee.push(arr)
+        },
+        Comlection(state,arr){
+            // Vue.set(state,'HaveSee',arr)
+            state.HasComlect.push(arr)
+        }
+}
+const store=new Vuex.Store({
+      state,
+      mutations
 })
 export default store

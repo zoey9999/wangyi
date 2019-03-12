@@ -6,9 +6,19 @@
             </div>
             <div class="container">
                   <div class="title">{{data.ltitle}}</div>
-                  <div class="time">{{data.mtime}}</div>
-                  <div class="source">{{data.source}}</div>
-                  <!-- <div>{{data.speciallogo}}</div> -->
+                  <div class="tap">
+                        <div class="tap-item">
+                              <div class="time">{{data.mtime}}</div>
+                              <div class="source">{{data.source}}</div>
+                        </div>
+                        <div class="tap-item">
+                              <div class="comlect" :class="{active:activeClass==data}" 
+                              @click="comlectBtn(data)">
+                                   {{data.comlect==true? '已收藏':'收藏'}}
+                              </div>
+                        </div>
+                  </div>
+                  
                   <img :src="data.imgsrc" width="100%">
                   <div class="digest">{{data.digest}}</div>
             </div>
@@ -21,12 +31,21 @@ export default {
       name: "detail",
       data() {
             return {
+                  activeClass: -1,
                   backBtnimg: require("../../../public/img/a4x.png"),
             };
       },
       methods: {
             backBtn() {
                   this.$router.back()
+            },
+            comlectBtn(item) {
+                  this.$store.commit('Comlection',item)
+                  this.activeClass=item
+                  // item.comlect=!item.comlect
+                  this.$set(item,'comlect',true)
+                  console.log('set后',item)
+                  
             }
       },
       computed: {
@@ -39,7 +58,6 @@ export default {
 <style lang="scss" scoped>
       .view{
             .nav{
-                  // position: fixed;
                   width: 100%;
                   height: 38px;
                   border: 1px solid #ccc;
@@ -69,15 +87,38 @@ export default {
                         line-height: 38px;
                         letter-spacing: 6px;
                   }
-                  .time{
-                        color: #ccc;
+                  .tap{
+                        height:50px;
+                        width:100%;
+                        display: flex;
 
+                        .tap-item{
+                              flex:1;
+
+                        }
+                        .time{
+                              color: #ccc;
+                        }
+                        .time,
+                        .source{
+                              font-size: 13px;
+                              line-height: 20px;
+                        }
+                        .comlect{
+                              width:70px;
+                              height: 35px;
+                              background-color: red;
+                              color:white;
+                              border-radius: 10px;
+                              margin: 8px auto;
+                              text-align: center;
+                              line-height: 35px;
+                        }
+                        .active{
+                               background-color: rgb(105, 104, 104);
+                        }
                   }
-                  .time,
-                  .source{
-                        font-size: 13px;
-                        line-height: 20px;
-                  }
+                  
                   img{
                         margin: 20px 0;
                   }

@@ -31,6 +31,7 @@ export default {
   name: "yule",
   data() {
     return {
+      comlect: false,
       yule: []
     };
   },
@@ -40,6 +41,7 @@ export default {
       let res = response.data;
       if (res) {
         this.yule = res.T1348648517839;
+        console.log(this.yule)
         this.$nextTick(() => {
           this.scroll = new BScroll(this.$refs.wrapper, {
             click: true
@@ -50,6 +52,7 @@ export default {
   },
   methods: {
     yuleDetail(params) {
+      this.$store.commit("BecomeHave", params)
       this.$router.push({ name: "detail", params });
     }
   }
